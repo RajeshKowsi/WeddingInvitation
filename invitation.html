@@ -173,13 +173,13 @@
   popup.classList.toggle("show");
   var myfunc = setTimeout(function(){
     popup.classList.toggle("show");
-  },2000);
+  },4000);
 var countOfPopups =1;
   const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     const pop = entry.target.querySelector('#myPopup');
 
-    if (entry.isIntersecting && countOfPopups < 3) {
+    if (entry.isIntersecting && countOfPopups < 5) {
       countOfPopups++;
       pop.classList.add('show');
       var myfunc = setTimeout(function(){
