@@ -8,32 +8,20 @@
 </head>
 
 <body>
-  <div class = "container-fluid">
-    <!-- <div class="row">
+  <div class="container-fluid">
+
+    <div class="row">
       <div class="col-lg-6">
         <div class="first_page">
           <img src="Page1_Top.jpg" alt="">
         </div>
-        <div class="Page1Bottom">
-          <img src="Page1_Bottom.jpg" alt="">
-        </div>
-      </div>
+        <div class="Page1Bottom popup" onclick="openGoogleMaps()">
 
-      <div class="full-length col-lg-6">
-        <img src="Page2.jpg" alt="">
-      </div>
-      <div class="full-length col-lg-6">
-        <img src="Page3.jpg" alt="">
-      </div>
-    </div> -->
-
-    <div class = "row">
-      <div class = "col-lg-6">
-        <div class="first_page">
-          <img src="Page1_Top.jpg" alt="">
-        </div>
-        <div class="Page1Bottom" onclick = "openGoogleMaps()">
+          <span class="popuptext" id="myPopup">Click Here to Open the Google Map!</span>
           <img src="Page1_Bottom.jpg" alt="">
+          <!-- <div class="popup" onclick="myFunction()">
+            <span class="popuptext" id="myPopup">Click Here for the Google Map!</span>
+          </div> -->
         </div>
       </div>
 
@@ -53,6 +41,11 @@
 </body>
 
 <style media="screen">
+
+@font-face {
+  font-family: Courgette-Regular;
+  src: url(Courgette-Regular.ttf) format("truetype");
+}
   .full-length {
     height: 100vh;
     margin: 0;
@@ -73,7 +66,7 @@
   }
 
   .first_page {
-    height: 84vh;
+    height: 80vh;
     margin: 0;
     animation: popout 1s forwards;
   }
@@ -86,19 +79,21 @@
     padding: 0;
   }
 
-  .container-fluid{
-    margin : 0;
+  .container-fluid {
+    margin: 0;
     padding: 0;
   }
 
-  div{
-    padding:0;
+  div {
+    padding: 0;
     margin: 0;
   }
 
-  .row, .col-lg-6, .col-lg-12{
+  .row,
+  .col-lg-6,
+  .col-lg-12 {
     margin: 0;
-    padding : 0;
+    padding: 0;
   }
 
 
@@ -107,18 +102,99 @@
     .first_page {
       height: 120vh;
     }
-      .Page1Bottom {
-          height: 200px;
-      }
+
+    .Page1Bottom {
+      height: 200px;
+    }
   }
+
+  .popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  font-size: 2rem;
+  font-family: Courgette-Regular;
+  height: 120px;
+  width: 400px;
+  background-color: grey;
+  color: white;
+  text-align: center;
+  border-radius: 16px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 80%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
 
 </style>
 
 <script>
 
-  function openGoogleMaps(){
+  function openGoogleMaps() {
     window.location.href = "https://www.google.com/maps/place/St.+Joseph's+Cathedral,+Dindigul+Diocese/@10.361526,77.964218,15z/data=!4m5!3m4!1s0x0:0xdf4b48159b6459ef!8m2!3d10.361526!4d77.9729727";
   }
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+  var myfunc = setTimeout(function(){
+    popup.classList.toggle("show");
+  },2000);
+var countOfPopups =1;
+  const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const pop = entry.target.querySelector('#myPopup');
+
+    if (entry.isIntersecting && countOfPopups < 3) {
+      countOfPopups++;
+      pop.classList.add('show');
+      var myfunc = setTimeout(function(){
+        popup.classList.remove("show");
+      },2000);
+	    return; // if we added the class, exit the function
+    }
+
+    // We're not intersecting, so remove the class!
+    pop.classList.remove('show');
+  });
+});
+
+observer.observe(document.querySelector('.Page1Bottom'));
+
 </script>
 
 </html>
