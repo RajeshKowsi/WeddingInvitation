@@ -18,5 +18,15 @@ var myfunc = setInterval(function(){
   document.getElementById("hours").innerHTML = hours;
   document.getElementById("mins").innerHTML = minutes;
   document.getElementById("secs").innerHTML = seconds;
-  
+
 },1000);
+
+var audio_Element = document.querySelector("#audio_btn");
+audio_Element.addEventListener("click",function(){
+  var audio = new Audio('timer_audio.mp3');
+  audio_Element.classList.add('border-green-400');
+  audio_Element.classList.remove('border-red-400');
+  audio_Element.classList.add('text-green-400');
+  audio_Element.classList.remove('text-red-400');
+  audio.play();
+});
