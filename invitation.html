@@ -97,16 +97,7 @@
   }
 
 
-  @media screen and (min-width: 992px) {
 
-    .first_page {
-      height: 120vh;
-    }
-
-    .Page1Bottom {
-      height: 200px;
-    }
-  }
 
   .popup {
   position: relative;
@@ -135,6 +126,23 @@
   bottom: 80%;
   left: 50%;
   margin-left: -80px;
+}
+
+@media screen and (min-width: 992px) {
+
+  .first_page {
+    height: 120vh;
+  }
+
+  .Page1Bottom {
+    height: 200px;
+  }
+
+  .popup .popuptext{
+    font-size: 1.5rem;
+    height: 80px;
+    width: 300px;
+  }
 }
 
 /* Popup arrow */
@@ -173,18 +181,18 @@
   popup.classList.toggle("show");
   var myfunc = setTimeout(function(){
     popup.classList.toggle("show");
-  },4000);
+  },2000);
 var countOfPopups =1;
   const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     const pop = entry.target.querySelector('#myPopup');
 
-    if (entry.isIntersecting && countOfPopups < 5) {
+    if (entry.isIntersecting && countOfPopups < 4) {
       countOfPopups++;
       pop.classList.add('show');
       var myfunc = setTimeout(function(){
         popup.classList.remove("show");
-      },2000);
+      },2500);
 	    return; // if we added the class, exit the function
     }
 
